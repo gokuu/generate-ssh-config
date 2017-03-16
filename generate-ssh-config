@@ -1,0 +1,21 @@
+#!/bin/sh
+
+full_config=()
+conf_files=($(find $HOME/.ssh/conf.d -name *.conf | tr '\n' ' '))
+
+for conf_file in "${conf_files[@]}"; do
+  # echo "Loading configuration file: ${conf_file}"
+
+  config="$(cat ${conf_file})"
+
+  replaced_config="${config//IdentityFile /IdentityFile $(dirname $conf_file)/}"
+  title="# Config file: ${conf_file} #"
+  separator=$(eval "printf '#%.0s' {1..${#title}}")
+
+  replaced_config=$(printf "\r$separator\n$title\n$separator\n\n${replaced_config}\n\n\r")
+
+  full_config+=("$replaced_config")
+done
+
+# Create the $HOME/.ssh/config file
+echo "${full_config[@]}" > $HOME/.ssh/config
