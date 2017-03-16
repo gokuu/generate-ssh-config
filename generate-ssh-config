@@ -17,5 +17,12 @@ for conf_file in "${conf_files[@]}"; do
   full_config+=("$replaced_config")
 done
 
+backup_timestamp=$(date +"%Y-%m-%d_%H-%M-%S")
+# Backup the current config file
+cp $HOME/.ssh/config $HOME/.ssh/config_$backup_timestamp.bak
+
 # Create the $HOME/.ssh/config file
 echo "${full_config[@]}" > $HOME/.ssh/config
+
+# Remove the backup if it is equal
+diff $HOME/.ssh/config $HOME/.ssh/config_$backup_timestamp.bak && rm -f $HOME/.ssh/config_$backup_timestamp.bak
