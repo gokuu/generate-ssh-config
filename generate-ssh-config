@@ -12,7 +12,7 @@ for conf_file in "${conf_files[@]}"; do
   title="# Config file: ${conf_file} #"
   separator=$(eval "printf '#%.0s' {1..${#title}}")
 
-  replaced_config=$(printf "\r$separator\n$title\n$separator\n\n${replaced_config}\n\n\r")
+  replaced_config=$(printf "\r$separator\n$title\n$separator\n\n${replaced_config//%/%%}\n\n\r")
 
   full_config+=("$replaced_config")
 done
