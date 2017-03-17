@@ -25,4 +25,4 @@ cp $HOME/.ssh/config $HOME/.ssh/config_$backup_timestamp.bak
 echo "${full_config[@]}" > $HOME/.ssh/config
 
 # Remove the backup if it is equal
-diff $HOME/.ssh/config $HOME/.ssh/config_$backup_timestamp.bak && rm -f $HOME/.ssh/config_$backup_timestamp.bak
+diff $HOME/.ssh/config $HOME/.ssh/config_$backup_timestamp.bak > /dev/null && rm -f $HOME/.ssh/config_$backup_timestamp.bak
