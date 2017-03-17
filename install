@@ -8,6 +8,7 @@ curl -s -L -o $HOME/.ssh/generate-ssh-config https://raw.githubusercontent.com/g
 echo "[\033[0;32mOK\033[0m]"
 
 printf "Patching ~/.bash_profile file           "
+touch $HOME/.bash_profile && \
 sed -i.bak -E -e '/# Generate .+config file dynamically/d' -e '/source.+generate-ssh-config/d' $HOME/.bash_profile && \
 sed -i.bak -e :a -e '/^\n*$/{$d;N;ba' -e '}' $HOME/.bash_profile && \
 printf "\n\n# Generate $HOME/.ssh/config file dynamically\nsource $HOME/.ssh/generate-ssh-config\n\n" >> $HOME/.bash_profile && \
