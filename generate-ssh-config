@@ -1,7 +1,7 @@
 #!/bin/sh
 
 full_config=()
-conf_files=($(find $HOME/.ssh/conf.d -name "*.conf" | tr '\n' ' '))
+conf_files=($(find $HOME/.ssh/conf.d -follow -name "*.conf" | tr '\n' ' '))
 
 for conf_file in "${conf_files[@]}"; do
   # echo "Loading configuration file: ${conf_file}"
